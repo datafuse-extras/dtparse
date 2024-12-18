@@ -98,6 +98,7 @@ use std::fmt;
 use std::num::ParseIntError;
 use std::str::FromStr;
 use std::vec::Vec;
+use log::warn;
 
 mod tokenize;
 mod weekday;
@@ -1047,7 +1048,7 @@ impl Parser {
                 *tzinfos.get(res.tzname.as_ref().unwrap()).unwrap(),
             ))
         } else if let Some(tzname) = res.tzname.as_ref() {
-            println!("tzname {} identified but not understood.", tzname);
+            warn!("tzname {} identified but not understood.", tzname);
             Ok(None)
         } else {
             Err(ParseError::TimezoneUnsupported)
